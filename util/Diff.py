@@ -1,7 +1,7 @@
 from math import *
 
 
-class Diff:
+class Diff(object):
     @staticmethod
     def length(start_point):
         return sqrt(sum([i ** 2 for i in start_point]))

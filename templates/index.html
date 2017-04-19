@@ -11,16 +11,14 @@
             <td><label>Function</label></td>
             <td>
                 <input type="text" name="f" placeholder="{{ def_f }}"
-                    {% if descent %} value="{{ descent.get_f() }}" {% endif %}
-                       required/>
+                        {% if descent %} value="{{ descent.get_f() }}" {% endif %}/>
             </td>
         </tr>
         <tr>
             <td><label>Start point</label></td>
             <td>
                 <input type="text" name="p" placeholder="{{ def_p }}"
-                        {% if descent %} value="{{ descent.get_start_point() }}" {% endif %}
-                       required>
+                        {% if descent %} value="{{ descent.get_start_point() }}" {% endif %}/>
             </td>
         </tr>
         <tr>
@@ -28,5 +26,31 @@
         </tr>
     </table>
 </form>
+{% if descent %}
+    <table>
+        <tr>
+            <td><label>Gradient</label></td>
+            <td>{{ descent.get_grad() }}</td>
+        </tr>
+        <tr>
+            <td><label>Calculated_gradient:</label></td>
+            <td>{{ descent.get_calculated_grad() }}</td>
+        </tr>
+        <tr>
+            <td><label>Length({{ point }}):</label></td>
+            <td>{{ length }}</td>
+        </tr>
+        <tr>
+            <td><label>Diff by direction:</label></td>
+            <td>{{ diff_by_direction }}</td>
+        </tr>
+        <tr>
+            <td>Function is {{ mess }}</td>
+        </tr>
+    </table>
+    <pre>
+    {{ report }}
+</pre>
+{% endif %}
 </body>
 </html>
