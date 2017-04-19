@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Gradient descent</title>
+</head>
+<body>
+<form action="/" method="post" target="_top">
+    <table>
+        <tr>
+            <td><label>Function</label></td>
+            <td>
+                <input type="text" name="f" placeholder="{{ def_f }}"
+                    {% if descent %} value="{{ descent.get_f() }}" {% endif %}
+                       required/>
+            </td>
+        </tr>
+        <tr>
+            <td><label>Start point</label></td>
+            <td>
+                <input type="text" name="p" placeholder="{{ def_p }}"
+                        {% if descent %} value="{{ descent.get_start_point() }}" {% endif %}
+                       required>
+            </td>
+        </tr>
+        <tr>
+            <td><input type="submit" value="Calculate"/></td>
+        </tr>
+    </table>
+</form>
+</body>
+</html>
