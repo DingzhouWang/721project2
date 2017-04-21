@@ -11,38 +11,50 @@ def index():
     if request.method == 'POST':
         f = request.form['f']
         p = request.form['p']
+        eps = request.form['eps']
+        option = request.form['options']
         if not f or f.isspace():
             f = None
         if not p or p.isspace():
             p = None
-        return redirect(url_for('calculate', f=f, start_point=p))
+        if not eps or eps.isspace():
+            eps = None
+        return redirect(url_for('calculate', f=f, start_point=p, eps=eps, option=option))
     return render_template('index.html',
                            def_f=GradientDescent.def_f,
-                           def_p=[GradientDescent.def_x0, GradientDescent.def_y0])
+                           def_p=str(GradientDescent.def_x0) + ' ' + str(GradientDescent.def_y0),
+                           def_eps=GradientDescent.def_eps)
 
 
 @app.route('/calculate')
-@app.route('/calculate/<f>/<start_point>')
-def calculate(f=None, start_point=None):
+def calculate():
+    f = request.args.get('f')
+    start_point = request.args.get('start_point')
+    eps = request.args.get('eps')
+    option = request.args.get('option')
     if start_point is not None:
         start_point = [float(x) for x in start_point.split()]
-    descent = GradientDescent(f, start_point)
-    point = descent.get_start_point()
-    length = Diff.length(point)
+    if eps is not None:
+        eps = float(eps)
+    find_min = True
+    if option == 'max':
+            find_min = False
+    descent = GradientDescent(f, start_point, eps, find_min)
+    length = Diff.length(descent.get_start_point())
     diff_by_direction = descent.calculate_diff_by_direction(length)
     mess = 'not monotonically'
     if Diff.is_increasing(diff_by_direction):
         mess = 'monotonically increasing'
     if Diff.is_decreasing(diff_by_direction):
         mess = 'monotonically decreasing'
-    descent.calculate()
+    res = descent.calculate()
     report = descent.get_report()
     return render_template('index.html',
                            descent=descent,
-                           point=point,
+                           point=' '.join(map(str, descent.get_start_point())),
                            length=length,
                            diff_by_direction=diff_by_direction,
-                           mess=mess, report=report)
+                           mess=mess, report=report, res='; '.join(map(str, res)))
 
 
 if __name__ == '__main__':

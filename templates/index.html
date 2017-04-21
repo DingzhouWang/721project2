@@ -13,13 +13,25 @@
                 <input type="text" name="f" placeholder="{{ def_f }}"
                         {% if descent %} value="{{ descent.get_f() }}" {% endif %}/>
             </td>
+            <td>-></td>
+            <td>
+                <select title="Optimize" name="options">
+                    <option value="min">Min</option>
+                    <option value="max">Max</option>
+                </select>
+            </td>
         </tr>
         <tr>
             <td><label>Start point</label></td>
             <td>
                 <input type="text" name="p" placeholder="{{ def_p }}"
-                        {% if descent %} value="{{ descent.get_start_point() }}" {% endif %}/>
+                        {% if descent %} value="{{ point }}" {% endif %}/>
             </td>
+        </tr>
+        <tr>
+            <td><label>Epsilon</label></td>
+            <td><input type="number" name="eps" placeholder="{{ def_eps }}" min="0" max="1" step="0.0001"
+                    {% if descent %} value="{{ descent.get_eps() }}" {% endif %}/></td>
         </tr>
         <tr>
             <td><input type="submit" value="Calculate"/></td>
@@ -49,8 +61,9 @@
         </tr>
     </table>
     <pre>
-    {{ report }}
-</pre>
+        {{ report }}
+    </pre>
+    <p>Result: {{ res }}</p>
 {% endif %}
 </body>
 </html>

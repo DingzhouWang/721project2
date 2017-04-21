@@ -10,11 +10,13 @@ class GradientDescent(object):
     def_eps = 0.01
     def_f = '2*x**2+y**2-32*x-6*y'
 
-    def __init__(self, f=None, start_point=None, eps=def_eps, find_min=True):
-        if start_point is None:
-            start_point = [self.def_x0, self.def_y0]
+    def __init__(self, f=None, start_point=None, eps=None, find_min=True):
         if f is None:
             f = self.def_f
+        if start_point is None:
+            start_point = [self.def_x0, self.def_y0]
+        if eps is None:
+            eps = self.def_eps
         self.__start_point = start_point
         self.__eps = eps
         self.__f = parse_expr(f)
