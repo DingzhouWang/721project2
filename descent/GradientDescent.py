@@ -34,7 +34,7 @@ class GradientDescent(object):
                 i = i.subs(variables[j], point[j]).evalf()
             res.append(i)
         return res
-
+#
     def calculate_diff_by_direction(self, length):
         return Diff.diff_by_direction(self.__calculated_grad, self.__start_point, length)
 

@@ -17,3 +17,4 @@ class Diff(object):
     @staticmethod
     def is_decreasing(diff):
         return diff < 0
+#
