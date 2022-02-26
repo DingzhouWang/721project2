@@ -1,6 +1,4 @@
-# 721project2
-
-# Gradient Descent with GCP
+# 721project2: Gradient Descent with GCP
 ## Introduction 
 The web applciatoin can help us calculate the gradient descent. We should input our function, start point, and epsilon. The application utilizes Containers and Kubernetes, and use Cloud Run to deploy the service. \
 Users can pull the container image from dockerhub or Container Registry and run in their local environment. \
