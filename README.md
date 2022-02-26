@@ -8,7 +8,7 @@ And of course, the microservice has default input.
 
 
 ## How to run the app
-1. Directly go to website [this link](34.111.205.68)
+1. Directly go to website [this link](https://project2-5mrpceoiya-uc.a.run.app)
 2. Run in local : `make` or `python3 app.py`
 3. Pull image from Dockerhub : `docker pull dyzhou66/flask-ml:latest` and then `docker run -p 8080:8080 dyzhou66/flask-ml`
 
